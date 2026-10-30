@@ -1,80 +1,56 @@
 # Autoevaluación y coevaluación · «Primer modelo en producción»
 
-**Para qué sirve:** antes de entregar, cada persona se puntúa a sí misma (**autoevaluación**) y valora el trabajo de otra persona o equipo (**coevaluación**, durante la *review*). Se puntúa con la rúbrica del reto (criterios de evaluación de la [ficha del reto](Reto_Sprint_03.md)), de 1 a 4.
-
-**Cómo se rellena y se sube (sin instalar nada):** cada persona entrega **su propio archivo**, con su cuenta de GitHub. Es el mismo procedimiento que el del entregable ([guía completa: cómo subir a GitHub](../../../material/5.%20Como_entregar_en_GitHub.md)).
-
-1. **Consigue el texto de este archivo.** Elige una de las dos formas:
-   - **Copiar:** en la página del archivo pulsa el botón **Raw** (arriba a la derecha, junto a los iconos del archivo). Se abre el texto sin formato: pulsa `Ctrl + A` (seleccionar todo) y `Ctrl + C` (copiar).
-   - **Descargar:** pulsa los **tres puntos ⋯** (arriba a la derecha) → **Download**. Cambia el nombre del archivo descargado a `autoevaluacion_nombre.md` (ver el paso 3) y salta al paso 2b.
-2. Entra en el repositorio de tu equipo → carpeta `sprint-03/` y, según lo que hayas hecho en el paso 1:
-   - **2a (copiado):** **Add file → Create new file**, escribe el nombre (paso 3) y pega el texto con `Ctrl + V`.
-   - **2b (descargado):** **Add file → Upload files**, arrastra tu archivo ya renombrado y pulsa **Commit changes**. Después ábrelo y pulsa el lápiz ✏️ para rellenarlo.
-3. **Nombre del archivo:** `autoevaluacion_nombre.md`, con tu nombre, en minúsculas, sin espacios ni tildes (por ejemplo `autoevaluacion_marta.md`). Si dos personas usan el mismo nombre, la segunda borra lo de la primera.
-4. Sustituye los `……` por tus respuestas **sin borrar las barras `|` de las tablas**. Para ver cómo queda, pulsa **Preview**.
-5. Pulsa **Commit changes**, escribe un mensaje corto («Subo mi autoevaluación») y confirma. **Sin ese botón no se guarda nada.**
-6. Para completarlo en otro momento: abre tu archivo → lápiz ✏️ → cambia → **Commit changes**.
-
-**Quién rellena qué:**
-- **Parte 1 (autoevaluación):** la rellenas tú sobre **tu** trabajo y el de tu equipo.
-- **Parte 2 (coevaluación):** la rellenas tú, en **tu mismo archivo**, sobre el trabajo de **la persona o el equipo que te toca revisar** (el docente te lo indica en la *review*). No escribas en el archivo de otra persona: cada cual sube lo suyo, y vuestra revisión se la comentáis también de palabra.
-
-Volver a la [ficha del reto](Reto_Sprint_03.md).
-
 ---
 
-## 1. Autoevaluación (cada persona, unos 5 minutos)
+## 1. Autoevaluación
 
-**Nombre:** ……
+**Nombre:** Juanjo
 
-**Repaso rápido** (las mismas preguntas del final de la ficha del reto; contesta Sí / No / A medias):
-
+### Repaso rápido
 | Pregunta | Mi respuesta |
-|---|---|
-| ¿El informe tiene las tres partes y cabe en 4 páginas? | …… |
-| ¿La métrica y el umbral están explicados en lenguaje de negocio? | …… |
-| ¿Hay evidencia de una llamada a la API (petición y respuesta), sin credenciales? | …… |
-| ¿Explicamos qué variables hemos excluido y por qué? | …… |
-| ¿Hemos cerrado y eliminado todos los recursos y lo demostramos? | …… |
-| ¿Hay al menos dos riesgos de IA responsable y una medida? | …… |
-| ¿Otra persona ha revisado el informe con la rúbrica? | …… |
+| :--- | :--- |
+| **¿El informe tiene las tres partes y cabe en 4 páginas?** | Sí, tiene las tres partes pero están divididas en 7 puntos y cabe en cuatro páginas |
+| **¿La métrica y el umbral están explicados en lenguaje de negocio?** | Sí: ROC-AUC para comparar y coste en euros para decidir el umbral (0,3), comparado con «avisar a todos» y «no avisar nunca». Falta sustituir los importes de ejemplo (100 € / 40 €) por los nuestros |
+| **¿Hay evidencia de una llamada a la API (petición y respuesta), sin credenciales?** | A medias: están la petición y la respuesta (probabilidad 0,816, alerta true), sin claves. |
+| **¿Explicamos qué variables hemos excluido y por qué?** | Sí: solo id_reserva (identificador); el resto se conoce al reservar y no hay columnas posteriores al hecho. |
+| **¿Hemos cerrado y eliminado todos los recursos y lo demostramos?** | No (todavía): falta hacer «Desconectar y eliminar entorno» |
+| **¿Hay al menos dos riesgos de IA responsable y una medida?** | Sí: cuatro (datos sintéticos, falsas alertas, sesgos por país/canal, deriva temporal), cada uno con su medida. |
+| **¿Otra persona ha revisado el informe con la rúbrica?** | No (todavía): pendiente de la review |
 
-**Puntúate de 1 a 4** en cada criterio de la rúbrica:
-
+### Puntúate de 1 a 4 en cada criterio de la rúbrica:
 | Criterio | Mi puntuación (1–4) | Por qué (una frase) | Qué haría para subir un punto |
-|---|---|---|---|
-| Corrección técnica | …… | …… | …… |
-| Reproducibilidad | …… | …… | …… |
-| Análisis y comunicación al cliente | …… | …… | …… |
-| IA responsable | …… | …… | …… |
+| :--- | :---: | :--- | :--- |
+| **Corrección técnica** | 3 | Partición temporal, modelo elegido por validación y umbral calculated con costes | Reejecutar el cuaderno completo, aclarar esa diferencia y poner el umbral 0,3 en la API. |
+| **Reproducibilidad** | 3 | Documentados versión de AutoGluon, preset, límite de tiempo, partición y semilla. | Pasar la semilla también a AutoGluon para que los resultados no varíen entre ejecuciones. |
+| **Análisis y comunicación al cliente** | 3 | Explico el ahorro real y su límite: solo un 11 % mejor que avisar a todos. | Usar nuestros importes reales y añadir el porcentaje de cancelaciones por canal. |
+| **IA responsable** | 3 | Cuatro riesgos con medida y una recomendación con límites claros | Medir de verdad el recall y la tasa de alertas por país y canal en lugar de solo proponerlo. |
 
-- **Lo que más me costó fue ……, porque ……**
-- **He usado IA para ……, y lo que he comprobado a mano es ……**
+**Reflexiones adicionales:**
+* **Lo que más me costó:** Interpretación de los resultados del leaderboard, porque los modelos de árboles puntuaban muchísimo mejor en la prueba que en validación y eso no tenía sentido, así que tuve que decidir no fiarme de esa tabla.
+* **Uso de IA:** He usado IA para redactar el borrador del informe a partir de los resultados del cuaderno, y lo que he comprobado a mano es que las cifras (costes, matriz, ahorro de 2.800 € y 35.580 €) coinciden con la salida del cuaderno.
 
 ---
 
-## 2. Coevaluación (durante la review, unos 10 minutos)
+## 2. Coevaluación (durante la review)
 
-**Trabajo revisado de (persona o equipo):** ……  **Revisado por (yo):** ……
+* **Trabajo revisado de:** AZUL
+* **Revisado por:** Juanjo
 
-**¿Está lo que pide el reto?** Marca ✔ (sí), ✘ (no) o — (no procede).
-
+### ¿Está lo que pide el reto?
 | Entregable (nómbralo) | ¿Está y se entiende? | Comentario breve |
-|---|---|---|
-| …… | …… | …… |
-| …… | …… | …… |
-| …… | …… | …… |
+| :--- | :---: | :--- |
+| **Informe Sprint 3 · TurisData · Primer modelo en producción_entrega.pdf** | ✔ | Análisis de los datos obtenidos |
+| **Notebook Colab (Link)** | ✔ | Cuaderno de notebook donde se hicieron los cálculos |
+| **DB Browser** | ✔ | Toma de contacto con la estructura de datos |
 
-**Puntuación (1–4) de quien revisa:**
-
+### Puntuación (1–4) de quien revisa:
 | Criterio | Puntuación | Comentario breve |
-|---|---|---|
-| Corrección técnica | …… | …… |
-| Reproducibilidad | …… | …… |
-| Análisis y comunicación al cliente | …… | …… |
-| IA responsable | …… | …… |
+| :--- | :---: | :--- |
+| **Corrección técnica** | 3 | Siempre se puede mejorar |
+| **Reproducibilidad** | 4 | Se hizo varias veces |
+| **Análisis y comunicación al cliente** | 3 | Una comunicación precisa y directa para que se entienda |
+| **IA responsable** | 4 | No se usaron datos personales que identifiquen a alguien |
 
-- **Lo que está muy bien:** ……
-- **Lo que yo cambiaría, y por qué:** ……
-
-> Se valora el **trabajo**, no a la persona. Frases que ayudan: «Me ha ayudado que …», «Yo cambiaría … porque …».
+* **Lo que está muy bien:** La limpieza de datos y la metodología.
+* **Lo que yo cambiaría, y por qué:** El uso de datos sintéticos en vez de usar datos de otras temporadas.
+* **Comentario general:** *En muy poco tiempo se pasó de entender los datos a interpretarlos.*
